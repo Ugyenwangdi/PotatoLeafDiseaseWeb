@@ -1,0 +1,9 @@
+{% extends 'headerPage.html' %} {% block content%}
+
+<div style="display: block; align-content: center;">
+
+    {% for i in all_results %}
+    <p>Predicted {{i.imagepath}} as: {{i.predicted}}</p>
+    <p>Confidence {{i.confidence}}%</p>
+    <img src={{i.imagepath}} style="width: 100px;"><br><br><br> {% endfor%} {% endblock %}
+</div>

@@ -1,0 +1,1 @@
+web: gunicorn PotatoLeafDisease.wsgi —log-file -

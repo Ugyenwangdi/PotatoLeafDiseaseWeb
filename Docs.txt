@@ -1,0 +1,48 @@
+$ py -3 -m venv env
+$ .\env\Scripts\activate
+$ pip install django
+$ django-admin startproject PotatoLeafDisease
+$ cd PotatoLeafDisease
+$ python manage.py startapp classifierApp
+
+$ pip install gunicorn
+$ pip install whitenoise
+$ pip install dj-database-url
+$ pip install psycopg2
+
+$ pip freeze > requirements.txt
+
+
+In the Procfile: PotatoLeafDisease is a projectname
+** web: gunicorn PotatoLeafDisease.wsgi —log-file -** 
+
+
+runtime.txt:
+**python-3.10.3 ** 
+
+
+ In the settings.py :
+
+Add it in MIDDLEWARE in settings.py file
+** 
+
+DEBUG = False
+ALLOWED_HOSTS = ['wulfi.herokuapp.com', 'localhost', '127.0.0.1'] 
+
+
+MIDDLEWARE = [
+  # 'django.middleware.security.SecurityMiddleware',
+  'whitenoise.middleware.WhiteNoiseMiddleware',
+ 
+] **
+
+Database update for heroku
+* 
+
+import dj_database_url
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)*
+
+
+########## image shown only on debug mode ##########s
