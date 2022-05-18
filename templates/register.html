@@ -1,0 +1,76 @@
+ {% load static %}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Change password</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+
+    <style>
+        .login--wrapper {
+            display: flex;
+            align-items: center;
+            height: 80vh;
+            justify-content: center;
+        }
+        
+        .form {
+            width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="login--wrapper">
+            <form method='POST' class="form">
+                {% csrf_token %}
+                <h2 class="section-title">Register</h2>
+                {% for message in messages %}
+                <h3>{{ message }}</h3>
+                {% endfor %}
+                <p></p>
+
+                <div class="mb-3">
+                    <label for="nameinput" class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control" id="nameinput">
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" class="form-control" name="email" id="email">
+                </div>
+
+                <div class="mb-3">
+                    <label for="Password1" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password1" id="Password1">
+                </div>
+
+                <div class="mb-3">
+                    <label for="Password2" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" name="password2" id="Password2">
+                </div>
+
+                <button type="submit" class="btn btn-dark btn-sm">Register</button><br>
+                <p><a href="{% url 'classifierApp:login' %}">Login?</a> </p>
+                <p><a href="{% url 'classifierApp:homepage' %}">Home</a> </p>
+
+
+
+
+            </form>
+
+        </div>
+
+    </div>
+</body>
+
+</html>

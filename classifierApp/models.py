@@ -13,3 +13,14 @@ class Result(models.Model):
 
     def __str__(self):
         return self.imagepath
+
+
+class APIResult(models.Model):
+    imagename = models.TextField()
+    image = models.ImageField(null=True, blank=True)
+    predicted = models.TextField()
+    confidence = models.IntegerField(default=0, null=True, blank=True)
+    saved = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.imagename

@@ -23,6 +23,25 @@
     <p style="padding: 8px;">{{filename}}</p> {% endif %}
 </div>
 
+<div class="col-md-6">
+    <div class="card card-body h-100">
+        {% if request.user.is_authenticated %}
+        <p>Hello {{request.user}}</p>
+        {% endif %}
+        <h5>Contribute to our API?</h5>
+        <hr>
+        <p>Contact at following address.</p>
+        <p>Contact: potatoleaf@gmail.com</p>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'classifierApp:predict' %}" class="btn btn-outline-dark btn-md m-1">Check the API</a>
+        <a href="{% url 'classifierApp:logout' %}" class="btn btn-outline-dark btn-md m-1">Logout</a> {% else %}
+        <a href="{% url 'classifierApp:register' %}" class="btn btn-outline-dark btn-md" style="margin-top: 4rem;">Register</a>
+
+        <a href="{% url 'classifierApp:login' %}" class="btn btn-outline-dark btn-md" style="margin-top: 4rem;">Login</a> {% endif %}
+
+    </div>
+</div>
+
 
 
 

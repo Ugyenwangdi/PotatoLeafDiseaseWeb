@@ -3,13 +3,24 @@ from . import views
 from django.conf.urls.static import static 
 from django.conf import settings
 
+from .views import PotatoAPIView
 
 app_name = 'classifierApp'
 
 urlpatterns = [
     path('', views.index, name='homepage'),
-    path('predict', views.predictImage, name='predict'),
+    path('predict', views.predictImage),
     path('viewdb', views.viewDataBase, name='view'),
+
+    path('register', views.register, name='register'),
+    
+    path('login/', views.loginUser, name="login"),
+    path('changepw/', views.changePW, name="changepw"),
+    path('logout/', views.logoutUser, name="logout"),  
+
+    path('api/results/all', PotatoAPIView.as_view()),
+    path('api/predict', PotatoAPIView.as_view(), name='predict'),
+
 
 ]
 

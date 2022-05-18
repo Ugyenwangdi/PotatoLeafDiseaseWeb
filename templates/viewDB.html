@@ -3,7 +3,9 @@
 <div style="display: block; align-content: center;">
 
     {% for i in all_results %}
-    <p>Predicted {{i.imagepath}} as: {{i.predicted}}</p>
+    <p>Predicted {{i.image}} as: {{i.predicted}}</p>
     <p>Confidence {{i.confidence}}%</p>
+    <p>{{i.saved}}</p>
+
     <img src={{i.imagepath}} style="width: 100px;"><br><br><br> {% endfor%} {% endblock %}
 </div>
