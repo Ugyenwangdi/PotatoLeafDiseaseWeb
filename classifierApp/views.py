@@ -163,7 +163,7 @@ def predictImage(request):
         filename = filePathName.split('/')[-1]
         print(filename)
 
-        new_item = Result(imagepath = filePathName , image = filename, predicted = predictedLabel, confidence = confidence)
+        new_item = Result(imagepath = filePathName , imagelink = 'https://potatoleafdisease.herokuapp.com'+filePathName, image = filename, predicted = predictedLabel, confidence = confidence)
         new_item.save()
 
         context = {'filePathName':filePathName, 'predictedLabel': predictedLabel, 'confidence': confidence, 'filename': filename}
@@ -251,7 +251,7 @@ class PotatoAPIView(APIView):
         filename = filePathName.split('/')[-1]
         print(filename)
 
-        new_item = APIResult(imagename = imagename, image = filename, predicted = predictedLabel, confidence = confidence)
+        new_item = APIResult(imagename = imagename, imagelink = 'https://potatoleafdisease.herokuapp.com'+filePathName, image = filename, predicted = predictedLabel, confidence = confidence)
         new_item.save()
 
 

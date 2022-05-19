@@ -3,6 +3,7 @@ from django.utils import timezone
 # Create your models here.
 class Result(models.Model):
     imagepath = models.TextField()
+    imagelink = models.TextField(null=True)
     image = models.ImageField(null=True, blank=True)
     predicted = models.TextField()
     confidence = models.IntegerField(default=0, null=True, blank=True)
@@ -16,7 +17,8 @@ class Result(models.Model):
 
 
 class APIResult(models.Model):
-    imagename = models.TextField()
+    imagename = models.TextField(null=True)
+    imagelink = models.TextField(null=True)
     image = models.ImageField(null=True, blank=True)
     predicted = models.TextField()
     confidence = models.IntegerField(default=0, null=True, blank=True)

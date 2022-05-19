@@ -6,9 +6,9 @@ from .models import Result, APIResult
 class LeafDiseaseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Result
-        fields = ('id', 'imagepath', 'image', 'predicted', 'confidence', 'saved')
+        fields = ('id', 'imagelink', 'predicted', 'confidence', 'saved')
 
 class APILeafDiseaseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = APIResult
-        fields = ('id', 'imagename', 'image', 'predicted', 'confidence', 'saved')
+        fields = ('id', 'imagename', 'imagelink', 'predicted', 'confidence', 'saved')
