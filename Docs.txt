@@ -46,3 +46,20 @@ DATABASES['default'].update(db_from_env)*
 
 
 ########## image shown only on debug mode ##########s
+
+
+
+
+
+############## Adding api to rapidapi hub ###############3
+
+https://docs.rapidapi.com/docs/add-an-api-basics
+
+
+Deployment:
+
+APK
+
+Website: https://potatoleafdisease.herokuapp.com/
+
+Deployed: https://rapidapi.com/user/12190105gcit
