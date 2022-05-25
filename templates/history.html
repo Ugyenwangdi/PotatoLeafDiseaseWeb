@@ -36,109 +36,95 @@
         </div>
     </section>
     <!-- End Header -->
+    <section id="upload" style="background-color: gray;">
 
-    {% if predictedLabel %}
+        <div class="banner">
+            <div style="text-align: center;">
 
-    <section style="background-color: gray; text-align: center;">
+                <div style="padding: 9rem;">
 
-        <div style="padding: 9rem;">
-            <div>
-                <h3>Result</h3>
-                <p>The predicted class is {{predictedLabel}}</p>
-                <p>Confidence: {{confidence}}%</p>
-                <img src={{filePathName}} alt="image" style="width: 500px;">
-                <p>Image name: {{filename}}</p>
+                    <p>History</p>
+                    <p>Image: {{image}}</p>
+                    <p>Predicted: {{predicted}}</p>
+                    <p>Image link: {{imagelink}}</p>
+
+                    <p>Confidence: {{confidence}}</p>
+                    <p>Saved: {{saved}}</p>
+                    <img src={{src}} style="width: 100px;"><br><br><br> {% if lateblight %}
+
+                    <p>
+                        <b>Late Blight </b><br> Blight is caused by the funguslike oomycete pathogen Phytophthora infestans. This potentially devastating disease can infect potato foliage and tubers at any stage of crop development. <br><br>Treatment
+                        : <br>late Blight is controlled by eliminating cull piles and volunteer potatoes, using proper harvesting and storage practices, and applying fungicideswhen necessary. Air drainage to facilitate the drying of foliage each day is
+                        important.
+                    </p>
+
+                    {% elif earlyblight %}
 
 
+                    <p>
+                        <b>Early Blight </b><br> Early Blight is caused by the fungus Alternaria solani. It is found wherever potatoes are grown.<br> Treatment 1. planting potato varieties that are resistant to the disease; late maturing are more resistant
+                        than early maturing varieties.<br> 2. Avoid overhead irrigation and allow for sufficient aeration between plants to allow the foliage to dry as quickly as possible.<br> 3. Keep the potato plants healthy and stress free by providing
+                        adequate nutrition and sufficient irrigation, especially later in the growing season after flowering when plants are most susceptible to the disease.
+                    </p>
+
+                    {% elif healthy %}
+                    <p>The Leaf was a Healthy leaf</p>
+
+                    {% else %}
+                    <p>The image was predicted Unknown</p>
+                    {% endif %}
+
+
+                    <p></p>
+                </div>
 
             </div>
-
-            <div>
-                {% if lateblight %}
-
-                <p>
-                    <b>Late Blight </b><br> Blight is caused by the funguslike oomycete pathogen Phytophthora infestans. This potentially devastating disease can infect potato foliage and tubers at any stage of crop development. <br><br>Treatment : <br>late
-                    Blight is controlled by eliminating cull piles and volunteer potatoes, using proper harvesting and storage practices, and applying fungicideswhen necessary. Air drainage to facilitate the drying of foliage each day is important.
-                </p>
-                {% elif earlyblight %}
-
-
-                <p>
-                    <b>Early Blight </b><br> Early Blight is caused by the fungus Alternaria solani. It is found wherever potatoes are grown.<br> Treatment 1. planting potato varieties that are resistant to the disease; late maturing are more resistant
-                    than early maturing varieties.<br> 2. Avoid overhead irrigation and allow for sufficient aeration between plants to allow the foliage to dry as quickly as possible.<br> 3. Keep the potato plants healthy and stress free by providing
-                    adequate nutrition and sufficient irrigation, especially later in the growing season after flowering when plants are most susceptible to the disease.
-                </p>
-                {% elif healthy %}
-                <p>The Leaf was a Healthy leaf</p>
-
-                {% else %}
-                <p>The image was predicted Unknown</p>
-                {% endif %}
-
-                <p>Predict</p><a href="/"> again?</a>
-
-            </div>
-
 
 
         </div>
 
-    </section>
-
-
-
-    {% else %}
-
-    <section id="upload" style="background-color: gray;">
-        <div class="banner">
-            <div class="info">
-
-
-
-                <h1>UPLOAD IMAGE <span>FOR CLASSIFICATION</span></h1>
-                <div class="whole" style="width:40.4%">
-                    <div class="wrapper">
-                        <div class="image">
-                            <img src="" alt="">
-                        </div>
-                        <div class="content">
-                            <div class="icon">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                            </div>
-                            <div class="text">
-                                No image chosen, yet!
-                            </div>
-                        </div>
-                        <div id="cancel-btn">
-                            <i class="fas fa-times"></i>
-                        </div>
-                    </div>
-                    <!-- <button onclick="defaultBtnActive()" id="custom-btn">Select Image</button>
-                  <input id="default-btn" type="file" hidden>
-                  <button onclick="" id="custom-btn">Predict</button>
-                  <input id="default-btn" type="file" hidden> -->
-
-
-                    <form method="post" enctype="multipart/form-data" action="predict">
-
-                        {% csrf_token %}
-                        <span onclick="defaultBtnActive()" id="custom-btn" style="text-align: center; padding: 1.3rem;"><input id="default-btn" name="filePath" type="file" hidden>Select</span>
-
-
-
-                        <input type="submit" id="custom-btn" value="Submit"></input>
-                    </form>
-
-
-                </div>
-            </div>
 
     </section>
+    <!-- End Hero Section  -->
 
-    {% endif %}
-
-
-
+    <!-- Service Section -->
+    <!-- <section id="services">
+    <div class="services container">
+      <div class="service-top">
+        <h1 class="section-title">Serv<span>i</span>ces</h1>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum deleniti maiores pariatur assumenda quas
+          magni et, doloribus quod voluptate quasi molestiae magnam officiis dolorum, dolor provident atque molestias
+          voluptatum explicabo!</p>
+      </div>
+      <div class="service-bottom">
+        <div class="service-item">
+          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+          <h2>Web Design</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis debitis rerum, magni voluptatem sed
+            architecto placeat beatae tenetur officia quod</p>
+        </div>
+        <div class="service-item">
+          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+          <h2>Web Design</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis debitis rerum, magni voluptatem sed
+            architecto placeat beatae tenetur officia quod</p>
+        </div>
+        <div class="service-item">
+          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+          <h2>Web Design</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis debitis rerum, magni voluptatem sed
+            architecto placeat beatae tenetur officia quod</p>
+        </div>
+        <div class="service-item">
+          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+          <h2>Web Design</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis debitis rerum, magni voluptatem sed
+            architecto placeat beatae tenetur officia quod</p>
+        </div>
+      </div>
+    </div>
+  </section> -->
+    <!-- End Service Section -->
 
     <!-- Projects Section -->
     <section id="projects">

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
+from rest_framework.decorators import api_view
 
 
 from django.core.files.storage import FileSystemStorage
@@ -39,92 +39,166 @@ with model_graph.as_default():
 
 
 
-def register(request):
+# def register(request):
 
-    if request.method == 'POST':
+#     if request.method == 'POST':
         
-        username = request.POST['username']
-        email = request.POST['email']
-        password1 = request.POST['password1']
-        password2 = request.POST['password2']
+#         username = request.POST['username']
+#         email = request.POST['email']
+#         password1 = request.POST['password1']
+#         password2 = request.POST['password2']
 
-        if username and email and password1 and password2:
-            if password1 == password2:
-                if User.objects.filter(username=username).exists():
-                    messages.info(request, 'Username taken...')
-                    return render(request, 'register.html')
+#         if username and email and password1 and password2:
+#             if password1 == password2:
+#                 if User.objects.filter(username=username).exists():
+#                     messages.info(request, 'Username taken...')
+#                     return render(request, 'register.html')
 
-                elif User.objects.filter(email=email).exists():
-                    messages.info(request, 'Email taken...')
-                    return render(request, 'register.html')
+#                 elif User.objects.filter(email=email).exists():
+#                     messages.info(request, 'Email taken...')
+#                     return render(request, 'register.html')
 
-                else:
-                    user = User.objects.create_user(username=username, password=password1, email=email)
-                    user.save()
-                    messages.info(request, 'User created')
-                    return render(request, 'index.html')
-            else:
-                messages.info(request, 'Password did not match..')
-            return render(request, 'register.html')
+#                 else:
+#                     user = User.objects.create_user(username=username, password=password1, email=email)
+#                     user.save()
+#                     messages.info(request, 'User created')
+#                     return render(request, 'index.html')
+#             else:
+#                 messages.info(request, 'Password did not match..')
+#             return render(request, 'register.html')
 
-        else:
-            messages.info(request, 'Fill all the fields')
-            return render(request, 'register.html')
-    else:
-        return render(request, 'register.html')
+#         else:
+#             messages.info(request, 'Fill all the fields')
+#             return render(request, 'register.html')
+#     else:
+#         return render(request, 'register.html')
 
 
 
-def loginUser(request):
+# def loginUser(request):
     
-    if request.user.is_authenticated:
-        return redirect('classifierApp:homepage')
+#     if request.user.is_authenticated:
+#         return redirect('classifierApp:homepage')
 
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+#     if request.method == 'POST':
+#         username = request.POST['username']
+#         password = request.POST['password']
 
-        user = authenticate(request, username=username, password=password)
+#         user = authenticate(request, username=username, password=password)
 
-        if user is not None:
-            login(request, user)
-            return redirect('classifierApp:homepage')
-        else:
-            return render(request, 'login.html', {'error': 'It seems you entered wrong details.'})
+#         if user is not None:
+#             login(request, user)
+#             return redirect('classifierApp:homepage')
+#         else:
+#             return render(request, 'login.html', {'error': 'It seems you entered wrong details.'})
 
-    return render(request, 'login.html')
+#     return render(request, 'login.html')
 
-def changePW(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password1 = request.POST['password1']
-        password2 = request.POST['password2']
+# def changePW(request):
+#     if request.method == 'POST':
+#         username = request.POST['username']
+#         password1 = request.POST['password1']
+#         password2 = request.POST['password2']
         
-        try:
-            user = User.objects.get(username=username)
+#         try:
+#             user = User.objects.get(username=username)
             
-            if username and password1 and password2:
-                if password1 == password2:
-                    user.set_password(password1)
-                    user.save()
-                    return redirect('classifierApp:homepage')
-                return render(request, 'change_password.html', {'error': 'Passwords did not match'})
-        except:
-            return render(request, 'change_password.html', {'error': 'could not find the details'})
-    return render(request, 'change_password.html')
+#             if username and password1 and password2:
+#                 if password1 == password2:
+#                     user.set_password(password1)
+#                     user.save()
+#                     return redirect('classifierApp:homepage')
+#                 return render(request, 'change_password.html', {'error': 'Passwords did not match'})
+#         except:
+#             return render(request, 'change_password.html', {'error': 'could not find the details'})
+#     return render(request, 'change_password.html')
 
-def logoutUser(request):
-    logout(request)
-    return redirect('classifierApp:homepage')
+# def logoutUser(request):
+#     logout(request)
+#     return redirect('classifierApp:homepage')
 
 
 # Create your views here.
-def index(request):
+def home(request):
     return render(request, 'index.html')
+
+def indexm(request):
+    return render(request, 'indexm.html')
+
+def history(request):
+    # if not request.user.is_authenticated:
+    #     return redirect('classifierApp:login')
+
+
+    all_results = Result.objects.all()
+
+    image = ''
+    predicted = ''
+    imagelink = ''
+    confidence = ''
+    saved = ''
+    src = ''
+    earlyblight = False
+    lateblight = False 
+    healthy = False
+    unknown = False
+
+    for i in all_results:
+        image = i.image
+        predicted = i.predicted
+        imagelink = i.imagelink
+        confidence = i.confidence
+        saved = i.saved
+        src = i.imagepath 
+
+        if predicted == "Early Blight":
+            earlyblight = True
+        
+        elif predicted == "Late Blight":
+            lateblight = True 
+
+        elif predicted == "Healthy":
+            healthy = True 
+
+        else:
+            unknown = True
+
+    # for i in all_results:
+    #     print(i.imagepath)
+    #     break
+
+    # listOfImages = os.listdir('./media/')
+    # listOfImagesPath = ['./media/' + i for i in listOfImages]
+    context = { 
+        "image" : image,
+        "predicted" : predicted,
+        "imagelink" : imagelink,
+        "confidence" : confidence,
+        "saved" : saved,
+        "src" : src, 
+        "earlyblight": earlyblight,
+        "lateblight" : lateblight,
+        "healthy" : healthy,
+        "unknown": unknown
+
+
+        
+    }  #  'listOfImagesPath': listOfImagesPath,
+    return render(request, 'history.html', context)
 
 def predictImage(request):
     # print(request)
     # print(request.POST.dict())
+
+    all_results = Result.objects.all()
+
+    all_results.delete()
+
+    earlyblight = False
+    lateblight = False 
+    healthy = False
+    unknown = False
+
 
     try:
 
@@ -158,6 +232,18 @@ def predictImage(request):
         print('Predicted label: ', predictedLabel)  
         print(f'Confidence : {confidence}%')    
 
+        if predictedLabel == "Early Blight":
+            earlyblight = True
+        
+        elif predictedLabel == "Late Blight":
+            lateblight = True 
+
+        elif predictedLabel == "Healthy":
+            healthy = True 
+
+        else:
+            unknown = True
+
         
 
         filename = filePathName.split('/')[-1]
@@ -166,7 +252,7 @@ def predictImage(request):
         new_item = Result(imagepath = filePathName , imagelink = 'https://potatoleafdisease.herokuapp.com'+filePathName, image = filename, predicted = predictedLabel, confidence = confidence)
         new_item.save()
 
-        context = {'filePathName':filePathName, 'predictedLabel': predictedLabel, 'confidence': confidence, 'filename': filename}
+        context = {'filePathName':filePathName, 'predictedLabel': predictedLabel, 'confidence': confidence, 'filename': filename, 'earlyblight' : earlyblight, 'lateblight' : lateblight, 'healthy' : healthy, 'unknown' : unknown}
         return render(request, 'index.html', context)
 
     except:
@@ -194,6 +280,28 @@ def viewDataBase(request):
 
 
 ########## API ############
+
+@api_view(['GET'])
+def getRoutes(request):
+    routes = [
+        {
+            'Endpoint': '/routes',
+            'method': 'Get',
+            'description': 'Return all the api routes'
+        },
+        {
+            'Endpoint': '/api/results/all',
+            'method': 'Get',
+            'description': 'Returns all the predicted results stored in database'
+        },
+        {
+            'Endpoint': '/api/predict',
+            'method': 'Post',
+            'description': 'Use this endpoint to predict the new class of an image'
+        }
+    ]
+
+    return Response(routes)
 
 
 # API endpoints
