@@ -261,11 +261,14 @@ def predictImage(request):
 
 def viewDataBase(request):
 
-    if not request.user.is_authenticated:
-        return redirect('classifierApp:login')
+    # if not request.user.is_authenticated:
+    #     return redirect('classifierApp:login')
 
 
     all_results = Result.objects.all()
+    # for i in all_results:
+    #     print(i.image.url)
+    #     break
 
     # for i in all_results:
     #     print(i.imagepath)
@@ -312,7 +315,8 @@ class PotatoAPIView(APIView):
         # if not request.user.is_authenticated:
         #     return redirect('classifierApp:login')
 
-        saved_results = Result.objects.all()
+        saved_results = APIResult.objects.all()
+
 
         serializer = LeafDiseaseSerializer(saved_results, many=True)
         # print(serializer.data)
