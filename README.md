@@ -78,6 +78,10 @@ $ pip install protobuf
 $ python manage.py runserver
 ```
 
+# Home Page
+<img src="kewa.png">  
+
+
 Team 12:
 - Galey Wangmo (12190051)
 - Gyeltshen Wangdi (12190053)
