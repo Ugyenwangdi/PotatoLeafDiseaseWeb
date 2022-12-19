@@ -69,12 +69,13 @@ To install `KEWA DOCTOR` project on your system:
 
 
 ```bash
-$ git clone git@gitlab.com:p7521/potatoleafdisease.git
+$ git clone https://github.com/Ugyenwangdi/PotatoLeafDiseaseWeb.git
 $ python -m venv env 
 $ env\Scripts\activate
-$ cd potatoleafdisease
-$ cd KEWA DOCTOR Django website
+$ cd PotatoLeafDiseaseWeb
 $ pip install -r requirements.txt
+$ pip install protobuf
+$ python manage.py runserver
 ```
 
 Team 12:
